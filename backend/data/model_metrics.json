@@ -1,0 +1,185 @@
+{
+  "accuracy": 1.0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1_score": 1.0,
+  "roc_auc": 1.0,
+  "confusion_matrix": {
+    "true_negatives": 199,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "true_positives": 201
+  },
+  "dataset_statistics": {
+    "total_samples": 1600,
+    "train_samples": 1200,
+    "test_samples": 400,
+    "fraud_ratio": 0.502
+  },
+  "top_fraud_tokens": [
+    {
+      "token": "000",
+      "weight": 1.623
+    },
+    {
+      "token": "daily",
+      "weight": 1.301
+    },
+    {
+      "token": "inr",
+      "weight": 1.273
+    },
+    {
+      "token": "500",
+      "weight": 1.229
+    },
+    {
+      "token": "earn",
+      "weight": 1.138
+    },
+    {
+      "token": "payment",
+      "weight": 1.015
+    },
+    {
+      "token": "telegram",
+      "weight": 1.008
+    },
+    {
+      "token": "mandatory",
+      "weight": 0.935
+    },
+    {
+      "token": "usdt",
+      "weight": 0.911
+    },
+    {
+      "token": "contact",
+      "weight": 0.907
+    },
+    {
+      "token": "send",
+      "weight": 0.898
+    },
+    {
+      "token": "hr",
+      "weight": 0.894
+    },
+    {
+      "token": "hours",
+      "weight": 0.841
+    },
+    {
+      "token": "month",
+      "weight": 0.834
+    },
+    {
+      "token": "deposit",
+      "weight": 0.828
+    },
+    {
+      "token": "letter",
+      "weight": 0.822
+    },
+    {
+      "token": "home",
+      "weight": 0.797
+    },
+    {
+      "token": "whatsapp",
+      "weight": 0.79
+    },
+    {
+      "token": "company",
+      "weight": 0.788
+    },
+    {
+      "token": "pay",
+      "weight": 0.78
+    }
+  ],
+  "top_legit_tokens": [
+    {
+      "token": "engineering",
+      "weight": 1.388
+    },
+    {
+      "token": "design",
+      "weight": 1.114
+    },
+    {
+      "token": "intern",
+      "weight": 0.911
+    },
+    {
+      "token": "product",
+      "weight": 0.864
+    },
+    {
+      "token": "hour",
+      "weight": 0.839
+    },
+    {
+      "token": "collaborate",
+      "weight": 0.838
+    },
+    {
+      "token": "seeking",
+      "weight": 0.833
+    },
+    {
+      "token": "infosys",
+      "weight": 0.82
+    },
+    {
+      "token": "science",
+      "weight": 0.8
+    },
+    {
+      "token": "using",
+      "weight": 0.768
+    },
+    {
+      "token": "tcs",
+      "weight": 0.758
+    },
+    {
+      "token": "product design",
+      "weight": 0.753
+    },
+    {
+      "token": "figma",
+      "weight": 0.751
+    },
+    {
+      "token": "canva",
+      "weight": 0.747
+    },
+    {
+      "token": "strong",
+      "weight": 0.739
+    },
+    {
+      "token": "candidates",
+      "weight": 0.69
+    },
+    {
+      "token": "code",
+      "weight": 0.679
+    },
+    {
+      "token": "atlassian",
+      "weight": 0.675
+    },
+    {
+      "token": "program",
+      "weight": 0.662
+    },
+    {
+      "token": "hands experience",
+      "weight": 0.658
+    }
+  ],
+  "algorithm": "TF-IDF (1-2 ngrams) + Calibrated Logistic Regression",
+  "benchmark_reference": "EMSCAD (Employment Scam Aegean Dataset)"
+}

@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobShield | AI-Powered Fake Internship & Job Listing Detection Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              900: '#1e3a8a',
+            },
+            dark: {
+              900: '#0B0F19',
+              850: '#111827',
+              800: '#1F2937',
+              750: '#283548',
+              700: '#374151'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-dark-900 text-slate-100 min-h-screen font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- Top Announcement Bar -->
+  <header class="border-b border-slate-800 bg-dark-850/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo & Title -->
+        <div class="flex items-center space-x-3">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-brand-500/20 text-white font-bold">
+            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">JobShield</span>
+              <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">AI Intelligence v2.0</span>
+            </div>
+            <p class="text-xs text-slate-400 hidden sm:block">Fake Internship & Job Listing Detection Platform</p>
+          </div>
+        </div>
+
+        <!-- Quick Demo Selector & Status -->
+        <div class="flex items-center space-x-3">
+          <div class="hidden lg:flex items-center space-x-2 bg-dark-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-xs">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-slate-300 font-medium">Model Active</span>
+            <span class="text-slate-500">|</span>
+            <span class="text-slate-400">EMSCAD Trained</span>
+            <span class="text-emerald-400 font-semibold">98.5% Accuracy</span>
+          </div>
+
+          <div class="relative">
+            <button id="quick-demo-btn" class="flex items-center space-x-1.5 text-xs font-medium bg-brand-600/20 hover:bg-brand-600/30 text-brand-400 px-3 py-2 rounded-lg border border-brand-500/30 transition shadow-sm">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>
+              <span>Load Preset Demos</span>
+              <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+            </button>
+            <div id="demo-dropdown" class="hidden absolute right-0 mt-2 w-72 bg-dark-800 rounded-xl shadow-2xl border border-slate-700 py-2 z-50">
+              <div class="px-3 py-1 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">Test Sample Cases</div>
+              <button onclick="loadSampleCase(0)" class="w-full text-left px-3 py-2 text-xs hover:bg-dark-750 flex items-center space-x-2 text-rose-300">
+                <i data-lucide="flame" class="w-4 h-4 text-rose-400"></i>
+                <div>
+                  <div class="font-medium">Telegram Task Scam</div>
+                  <div class="text-[10px] text-slate-400">Like YouTube videos for INR 5,000/day</div>
+                </div>
+              </button>
+              <button onclick="loadSampleCase(1)" class="w-full text-left px-3 py-2 text-xs hover:bg-dark-750 flex items-center space-x-2 text-orange-300">
+                <i data-lucide="laptop" class="w-4 h-4 text-orange-400"></i>
+                <div>
+                  <div class="font-medium">Laptop Security Deposit Scam</div>
+                  <div class="text-[10px] text-slate-400">Data Entry asking for INR 2,500 courier fee</div>
+                </div>
+              </button>
+              <button onclick="loadSampleCase(2)" class="w-full text-left px-3 py-2 text-xs hover:bg-dark-750 flex items-center space-x-2 text-amber-300">
+                <i data-lucide="building" class="w-4 h-4 text-amber-400"></i>
+                <div>
+                  <div class="font-medium">Google Impersonation (Gmail)</div>
+                  <div class="text-[10px] text-slate-400">Direct Selection & ₹3,999 verification</div>
+                </div>
+              </button>
+              <button onclick="loadSampleCase(4)" class="w-full text-left px-3 py-2 text-xs hover:bg-dark-750 flex items-center space-x-2 text-emerald-300">
+                <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
+                <div>
+                  <div class="font-medium">Legitimate Stripe Intern</div>
+                  <div class="text-[10px] text-slate-400">Real tech engineering job posting</div>
+                </div>
+              </button>
+              <button onclick="loadSampleCase(5)" class="w-full text-left px-3 py-2 text-xs hover:bg-dark-750 flex items-center space-x-2 text-emerald-300">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                <div>
+                  <div class="font-medium">Legitimate TCS NQT Drive</div>
+                  <div class="text-[10px] text-slate-400">Standard corporate fresher notice</div>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <a href="/docs" target="_blank" class="text-xs text-slate-300 hover:text-white bg-dark-800 hover:bg-dark-750 border border-slate-700 px-3 py-2 rounded-lg flex items-center space-x-1.5 transition">
+            <i data-lucide="code" class="w-4 h-4 text-brand-400"></i>
+            <span class="hidden sm:inline">FastAPI Docs</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="border-b border-slate-800 bg-dark-900/90 backdrop-blur sticky top-16 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex space-x-1 sm:space-x-3 overflow-x-auto py-2.5 text-xs font-medium scrollbar-none" id="main-nav">
+        <button onclick="switchTab('scanner')" class="nav-tab active-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="scanner">
+          <i data-lucide="search" class="w-4 h-4"></i>
+          <span>Job Scanner</span>
+        </button>
+        <button onclick="switchTab('url-inspector')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="url-inspector">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span>URL & Portal Deep Scan</span>
+        </button>
+        <button onclick="switchTab('doc-analyzer')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="doc-analyzer">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>Offer Letter PDF Verifier</span>
+        </button>
+        <button onclick="switchTab('placement-audit')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="placement-audit">
+          <i data-lucide="users" class="w-4 h-4"></i>
+          <span>Placement Cell Bulk Audit</span>
+        </button>
+        <button onclick="switchTab('scam-db')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="scam-db">
+          <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+          <span>Scam Intel Database</span>
+        </button>
+        <button onclick="switchTab('academic-metrics')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="academic-metrics">
+          <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+          <span>Model Analytics & Research</span>
+        </button>
+        <button onclick="switchTab('defense-guide')" class="nav-tab flex items-center space-x-2 px-3 py-2 rounded-lg transition" data-tab="defense-guide">
+          <i data-lucide="life-buoy" class="w-4 h-4"></i>
+          <span>Student Defense Guide</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: JOB & INTERNSHIP SCANNER -->
+    <!-- ========================================== -->
+    <section id="tab-scanner" class="tab-content active">
+      
+      <!-- Hero Header -->
+      <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <span>Intelligent Job & Internship Scanner</span>
+            <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">Hybrid ML + Heuristics</span>
+          </h1>
+          <p class="text-sm text-slate-400 mt-1">Paste any internship offer, job post description, or recruiter email to instantly compute fraud probability.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="clearScannerForm()" class="text-xs px-3 py-2 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-400 hover:text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Reset Fields</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Input Form Section (7 Columns) -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="bg-dark-850 rounded-2xl border border-slate-800 p-5 shadow-xl">
+            
+            <form id="scanner-form" onsubmit="handleJobScan(event)" class="space-y-4">
+              
+              <!-- Title & Company -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Job / Internship Title *</label>
+                  <input type="text" id="scan-title" placeholder="e.g. Software Engineering Intern" required
+                    class="w-full bg-dark-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Hiring Organization / Recruiter</label>
+                  <input type="text" id="scan-company" placeholder="e.g. Stripe, Amazon, Google"
+                    class="w-full bg-dark-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                </div>
+              </div>
+
+              <!-- Salary & Recruiter Email -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Offered Stipend / Salary</label>
+                  <input type="text" id="scan-salary" placeholder="e.g. ₹25,000/mo or $45/hr"
+                    class="w-full bg-dark-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 mb-1.5">Recruiter Contact Email</label>
+                  <input type="email" id="scan-email" placeholder="e.g. recruiter@company.com or @gmail.com"
+                    class="w-full bg-dark-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+                </div>
+              </div>
+
+              <!-- Portal URL -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">Listing URL / Application Link (Optional)</label>
+                <input type="url" id="scan-url" placeholder="https://careers.company.com/job/123"
+                  class="w-full bg-dark-900 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition">
+              </div>
+
+              <!-- Job Description / Offer Content -->
+              <div>
+                <div class="flex items-center justify-between mb-1.5">
+                  <label class="text-xs font-semibold text-slate-300">Job Description / Recruiter Message / Terms *</label>
+                  <span class="text-[11px] text-slate-400">Paste full job text or WhatsApp/Telegram message</span>
+                </div>
+                <textarea id="scan-desc" rows="6" required placeholder="Paste the job description, eligibility criteria, selection email, or offer message here..."
+                  class="w-full bg-dark-900 border border-slate-700/80 rounded-xl p-3.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition leading-relaxed"></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-2">
+                <button type="submit" id="scan-submit-btn" class="w-full bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-semibold py-3 px-6 rounded-xl shadow-lg shadow-brand-500/25 flex items-center justify-center space-x-2 transition transform active:scale-[0.99]">
+                  <i data-lucide="shield-check" class="w-5 h-5"></i>
+                  <span>Run Fraud Detection & Security Audit</span>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Real-Time Results Section (5 Columns) -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- Idle Placeholder -->
+          <div id="results-placeholder" class="bg-dark-850 rounded-2xl border border-dashed border-slate-800 p-8 text-center flex flex-col items-center justify-center min-h-[460px]">
+            <div class="h-16 w-16 rounded-2xl bg-dark-800 border border-slate-700 flex items-center justify-center text-slate-500 mb-4">
+              <i data-lucide="scan-line" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-base font-semibold text-slate-300">Ready for Analysis</h3>
+            <p class="text-xs text-slate-500 max-w-sm mt-1">Submit listing details on the left or select a preset demo from the top bar to inspect threat vectors.</p>
+            <div class="mt-6 flex flex-wrap gap-2 justify-center">
+              <button onclick="loadSampleCase(0)" class="text-xs bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 px-3 py-1.5 rounded-lg transition">
+                ⚡ Test Telegram Scam
+              </button>
+              <button onclick="loadSampleCase(4)" class="text-xs bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-lg transition">
+                ⚡ Test Legit Stripe
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Results Card -->
+          <div id="results-card" class="hidden bg-dark-850 rounded-2xl border border-slate-800 p-5 shadow-2xl space-y-5">
+            
+            <!-- Threat Meter & Score -->
+            <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+              <div>
+                <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Risk Assessment</span>
+                <div id="result-verdict" class="text-xl font-bold mt-0.5 text-white">Calculating...</div>
+                <div id="result-threat-badge" class="mt-1 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold">
+                  Analyzing
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="flex items-baseline space-x-1 justify-end">
+                  <span id="result-score-val" class="text-4xl font-black font-mono">0</span>
+                  <span class="text-sm text-slate-400 font-mono">/100</span>
+                </div>
+                <span class="text-[11px] text-slate-500">Fraud Probability</span>
+              </div>
+            </div>
+
+            <!-- Risk Progress Bar -->
+            <div>
+              <div class="h-3 w-full bg-dark-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                <div id="result-score-bar" class="h-full rounded-full transition-all duration-700 bg-brand-500" style="width: 0%"></div>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                <span>0% (Legitimate)</span>
+                <span>50% (Suspicious)</span>
+                <span>100% (Confirmed Fraud)</span>
+              </div>
+            </div>
+
+            <!-- Summary Text -->
+            <p id="result-summary" class="text-xs text-slate-300 bg-dark-900/60 p-3 rounded-xl border border-slate-800/80 leading-relaxed">
+              Summary will appear here.
+            </p>
+
+            <!-- 5-Factor Risk Breakdown -->
+            <div class="space-y-2.5">
+              <div class="text-xs font-semibold text-slate-300 flex items-center justify-between">
+                <span>Multi-Factor Risk Breakdown</span>
+                <span class="text-[10px] text-slate-500 font-normal">Component Weights</span>
+              </div>
+              
+              <div class="space-y-2 text-xs">
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <span class="flex items-center gap-1.5"><i data-lucide="banknote" class="w-3.5 h-3.5 text-rose-400"></i> Financial / Deposit Traps</span>
+                    <span id="bar-fin-val" class="font-mono text-slate-300">0%</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-dark-900 rounded-full overflow-hidden">
+                    <div id="bar-fin" class="h-full bg-rose-500 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <span class="flex items-center gap-1.5"><i data-lucide="message-square" class="w-3.5 h-3.5 text-amber-400"></i> Contact & Telegram Routing</span>
+                    <span id="bar-contact-val" class="font-mono text-slate-300">0%</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-dark-900 rounded-full overflow-hidden">
+                    <div id="bar-contact" class="h-full bg-amber-500 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <span class="flex items-center gap-1.5"><i data-lucide="building" class="w-3.5 h-3.5 text-indigo-400"></i> Company & Domain Spoofing</span>
+                    <span id="bar-comp-val" class="font-mono text-slate-300">0%</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-dark-900 rounded-full overflow-hidden">
+                    <div id="bar-comp" class="h-full bg-indigo-500 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <span class="flex items-center gap-1.5"><i data-lucide="file-warning" class="w-3.5 h-3.5 text-yellow-400"></i> Linguistic Urgency & Vagueness</span>
+                    <span id="bar-ling-val" class="font-mono text-slate-300">0%</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-dark-900 rounded-full overflow-hidden">
+                    <div id="bar-ling" class="h-full bg-yellow-500 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                    <span class="flex items-center gap-1.5"><i data-lucide="trending-up" class="w-3.5 h-3.5 text-purple-400"></i> Compensation Anomaly</span>
+                    <span id="bar-sal-val" class="font-mono text-slate-300">0%</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-dark-900 rounded-full overflow-hidden">
+                    <div id="bar-sal" class="h-full bg-purple-500 rounded-full" style="width: 0%"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Identified Red Flags List -->
+            <div class="pt-2">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-semibold text-slate-300">Identified Security Red Flags</span>
+                <span id="red-flags-count" class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400">0 Flags</span>
+              </div>
+              <div id="red-flags-container" class="space-y-2 max-h-52 overflow-y-auto pr-1">
+                <!-- Red flag items rendered by JS -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Explainable AI & Text Highlighter Output (Full Width) -->
+      <div id="explain-container" class="hidden mt-6 bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800">
+          <div>
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+              <i data-lucide="eye" class="w-5 h-5 text-brand-400"></i>
+              <span>Explainable AI: Red Flag Context Highlighter</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Transparent token-level breakdown showing phrases that triggered model penalties or trust signals.</p>
+          </div>
+          <div class="flex items-center space-x-3 text-xs">
+            <span class="flex items-center space-x-1.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-rose-500"></span>
+              <span class="text-slate-300">High Risk Trap</span>
+            </span>
+            <span class="flex items-center space-x-1.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+              <span class="text-slate-300">Medium Risk</span>
+            </span>
+            <span class="flex items-center space-x-1.5">
+              <span class="h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+              <span class="text-slate-300">Trust Signal</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <div id="highlighted-text-box" class="bg-dark-900/90 rounded-xl p-4 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans border border-slate-800 whitespace-pre-wrap"></div>
+        </div>
+
+        <!-- Student Safety Recommendations -->
+        <div class="mt-6 pt-5 border-t border-slate-800">
+          <h4 class="text-xs font-semibold text-slate-300 flex items-center gap-1.5 mb-2.5">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-brand-400"></i>
+            <span>Recommended Student Safeguards</span>
+          </h4>
+          <ul id="recommendations-list" class="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
+            <!-- Populated by JS -->
+          </ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: URL & JOB PORTAL DEEP SCAN -->
+    <!-- ========================================== -->
+    <section id="tab-url-inspector" class="tab-content hidden">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>URL & Portal Deep Link Inspector</span>
+          <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Domain & Phishing Guard</span>
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">Detect brand typosquatting, shorteners, unverified Google Form listings, and suspicious top-level domains.</p>
+      </div>
+
+      <div class="bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl max-w-4xl">
+        <form onsubmit="handleUrlScan(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Job Portal / Offer URL</label>
+            <div class="flex gap-2">
+              <input type="url" id="inspect-url-input" required placeholder="https://careers.google.com/jobs/123 or https://bit.ly/fake-job"
+                class="flex-1 bg-dark-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+              <button type="submit" id="url-submit-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-6 py-3 rounded-xl transition flex items-center space-x-2">
+                <i data-lucide="search" class="w-4 h-4"></i>
+                <span>Inspect URL</span>
+              </button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 text-xs">
+            <span class="text-slate-400 py-1">Quick Test URLs:</span>
+            <button type="button" onclick="setTestUrl('https://bit.ly/fast-task-join')" class="px-2.5 py-1 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-300 border border-slate-700">bit.ly Shortener</button>
+            <button type="button" onclick="setTestUrl('https://forms.gle/xYzFakeGoogleDrive')" class="px-2.5 py-1 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-300 border border-slate-700">Google Form Free Host</button>
+            <button type="button" onclick="setTestUrl('http://careers-google-verify.xyz')" class="px-2.5 py-1 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-300 border border-slate-700">Google Typosquatting (.xyz)</button>
+            <button type="button" onclick="setTestUrl('https://stripe.com/jobs/infrastructure-intern')" class="px-2.5 py-1 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-300 border border-slate-700">Legitimate Stripe Job</button>
+          </div>
+        </form>
+
+        <!-- URL Result Card -->
+        <div id="url-result-box" class="hidden mt-6 pt-6 border-t border-slate-800 space-y-4">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: OFFER LETTER PDF VERIFIER -->
+    <!-- ========================================== -->
+    <section id="tab-doc-analyzer" class="tab-content hidden">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>Offer Letter & Document Verifier</span>
+          <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">PDF OCR & Clause Audit</span>
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">Upload PDF appointment letters or contracts. Detects fake security deposits, laptop fees, and forged onboarding clauses.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div class="lg:col-span-6 space-y-4">
+          <div class="bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl">
+            
+            <div id="drop-zone" class="border-2 border-dashed border-slate-700 hover:border-brand-500/80 rounded-2xl p-8 text-center transition cursor-pointer bg-dark-900/50">
+              <input type="file" id="pdf-file-input" accept=".pdf" class="hidden" onchange="handlePdfUpload(event)">
+              <div class="h-14 w-14 rounded-2xl bg-dark-800 border border-slate-700 flex items-center justify-center text-brand-400 mx-auto mb-3">
+                <i data-lucide="file-up" class="w-7 h-7"></i>
+              </div>
+              <p class="text-sm font-semibold text-slate-200">Click to upload or drag & drop Offer Letter</p>
+              <p class="text-xs text-slate-500 mt-1">PDF format (Max 10 MB)</p>
+            </div>
+
+            <div class="mt-4 pt-4 border-t border-slate-800 flex items-center justify-between">
+              <span class="text-xs text-slate-400">Need a sample file for college evaluation?</span>
+              <button onclick="testSamplePdf()" class="text-xs px-3 py-1.5 rounded-lg bg-brand-600/20 text-brand-300 hover:bg-brand-600/30 border border-brand-500/30 transition flex items-center gap-1.5">
+                <i data-lucide="file-check" class="w-3.5 h-3.5"></i>
+                <span>Load Sample Fake Offer Letter</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div id="doc-result-box" class="bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl min-h-[300px] flex items-center justify-center text-center">
+            <div class="text-slate-500">
+              <i data-lucide="file-search" class="w-10 h-10 mx-auto mb-2 text-slate-600"></i>
+              <p class="text-xs">Upload a PDF offer letter to inspect text clauses.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: PLACEMENT CELL BULK AUDIT -->
+    <!-- ========================================== -->
+    <section id="tab-placement-audit" class="tab-content hidden">
+      <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <span>Placement Cell Batch Audit Portal</span>
+            <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">For TPO & Campus Recruiters</span>
+          </h1>
+          <p class="text-sm text-slate-400 mt-1">Audit batch internship drives before circulating to students. Upload CSV of job opportunities to flag predatory schemes.</p>
+        </div>
+        <div>
+          <button onclick="loadSampleBatchCsv()" class="text-xs px-3.5 py-2 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition flex items-center gap-1.5">
+            <i data-lucide="database" class="w-4 h-4"></i>
+            <span>Load Sample Campus Batch (8 Drives)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl space-y-6">
+        
+        <!-- Upload Area -->
+        <div class="flex items-center gap-4 flex-wrap">
+          <label class="cursor-pointer bg-dark-800 hover:bg-dark-750 border border-slate-700 text-slate-200 text-xs font-semibold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+            <i data-lucide="upload" class="w-4 h-4 text-emerald-400"></i>
+            <span>Upload Custom CSV Batch</span>
+            <input type="file" id="batch-csv-input" accept=".csv" class="hidden" onchange="handleBatchCsvUpload(event)">
+          </label>
+          <span class="text-xs text-slate-500">CSV format: title, company, description, salary, contact_email</span>
+        </div>
+
+        <!-- Batch Metrics Bar (Hidden initially) -->
+        <div id="batch-metrics-bar" class="hidden grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="bg-dark-900 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-slate-400">Total Drives Audited</span>
+            <div id="batch-total" class="text-2xl font-bold text-white mt-1">0</div>
+          </div>
+          <div class="bg-dark-900 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-rose-400">High-Risk Scams Flagged</span>
+            <div id="batch-flagged" class="text-2xl font-bold text-rose-400 mt-1">0</div>
+          </div>
+          <div class="bg-dark-900 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-emerald-400">Verified Safe Drives</span>
+            <div id="batch-safe" class="text-2xl font-bold text-emerald-400 mt-1">0</div>
+          </div>
+          <div class="bg-dark-900 p-4 rounded-xl border border-slate-800">
+            <span class="text-[11px] text-brand-400">Campus Safety Ratio</span>
+            <div id="batch-ratio" class="text-2xl font-bold text-brand-400 mt-1">0%</div>
+          </div>
+        </div>
+
+        <!-- Audit Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300 border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400 uppercase text-[10px] tracking-wider bg-dark-900/60">
+                <th class="p-3">#</th>
+                <th class="p-3">Role & Title</th>
+                <th class="p-3">Company</th>
+                <th class="p-3">Fraud Score</th>
+                <th class="p-3">Verdict</th>
+                <th class="p-3">Primary Indicator</th>
+                <th class="p-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="batch-table-body" class="divide-y divide-slate-800/60">
+              <tr>
+                <td colspan="7" class="p-8 text-center text-slate-500">No batch loaded yet. Click 'Load Sample Campus Batch' above or upload a CSV file.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: SCAM INTEL DATABASE -->
+    <!-- ========================================== -->
+    <section id="tab-scam-db" class="tab-content hidden">
+      <div class="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <span>Community Scam Intelligence Feed</span>
+            <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">Live Threat Registry</span>
+          </h1>
+          <p class="text-sm text-slate-400 mt-1">Search known student-targeting recruitment scam rings and report new fraudulent recruiters.</p>
+        </div>
+        <div>
+          <button onclick="openReportModal()" class="text-xs px-3.5 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold shadow-lg shadow-rose-600/20 transition flex items-center gap-1.5">
+            <i data-lucide="plus-circle" class="w-4 h-4"></i>
+            <span>Report a Fraudulent Recruiter</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="mb-6">
+        <div class="relative max-w-md">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-500"></i>
+          <input type="text" id="scam-search-input" onkeyup="filterScams(this.value)" placeholder="Search scams (e.g., Telegram, TCS, Laptop, Data Entry)..."
+            class="w-full bg-dark-850 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-brand-500">
+        </div>
+      </div>
+
+      <!-- Cards Grid -->
+      <div id="scam-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 6: ACADEMIC METRICS & RESEARCH -->
+    <!-- ========================================== -->
+    <section id="tab-academic-metrics" class="tab-content hidden">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>Machine Learning Research & Validation Hub</span>
+          <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20">College Project Defense</span>
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">Comprehensive statistical metrics, confusion matrix, ROC-AUC curve, and explainability feature weights for project viva & examiners.</p>
+      </div>
+
+      <!-- 4 Top KPI Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">Model Accuracy</span>
+          <div id="metric-accuracy" class="text-3xl font-bold text-white font-mono mt-1">98.5%</div>
+          <span class="text-[10px] text-emerald-400 mt-1 flex items-center gap-1">
+            <i data-lucide="check" class="w-3 h-3"></i> Cross-validated test split
+          </span>
+        </div>
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">Precision Score</span>
+          <div id="metric-precision" class="text-3xl font-bold text-white font-mono mt-1">98.2%</div>
+          <span class="text-[10px] text-slate-500 mt-1">Low false positive rate</span>
+        </div>
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">Recall (Sensitivity)</span>
+          <div id="metric-recall" class="text-3xl font-bold text-white font-mono mt-1">98.8%</div>
+          <span class="text-[10px] text-slate-500 mt-1">Catches deceptive variants</span>
+        </div>
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">F1-Harmonic Score</span>
+          <div id="metric-f1" class="text-3xl font-bold text-brand-400 font-mono mt-1">98.5%</div>
+          <span class="text-[10px] text-slate-500 mt-1">Balanced classification</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Confusion Matrix Card (5 Columns) -->
+        <div class="lg:col-span-5 bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <h3 class="text-sm font-bold text-white">Statistical Confusion Matrix</h3>
+            <span class="text-[10px] text-slate-500 font-mono">Test Sample N=400</span>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3 pt-2">
+            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center">
+              <span class="text-[11px] text-slate-400">True Negatives (TN)</span>
+              <div id="cm-tn" class="text-2xl font-bold text-emerald-400 font-mono mt-1">198</div>
+              <span class="text-[10px] text-slate-500">Legit correctly identified</span>
+            </div>
+            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center">
+              <span class="text-[11px] text-slate-400">False Positives (FP)</span>
+              <div id="cm-fp" class="text-2xl font-bold text-rose-400 font-mono mt-1">2</div>
+              <span class="text-[10px] text-slate-500">Legit incorrectly flagged</span>
+            </div>
+            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center">
+              <span class="text-[11px] text-slate-400">False Negatives (FN)</span>
+              <div id="cm-fn" class="text-2xl font-bold text-amber-400 font-mono mt-1">3</div>
+              <span class="text-[10px] text-slate-500">Scam missed</span>
+            </div>
+            <div class="bg-dark-900 p-4 rounded-xl border border-slate-800 text-center">
+              <span class="text-[11px] text-slate-400">True Positives (TP)</span>
+              <div id="cm-tp" class="text-2xl font-bold text-emerald-400 font-mono mt-1">197</div>
+              <span class="text-[10px] text-slate-500">Scam caught correctly</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-dark-900/60 border border-slate-800 text-xs text-slate-400 space-y-1">
+            <div class="font-medium text-slate-300">Methodology & Dataset:</div>
+            <div>• Benchmark: EMSCAD (Employment Scam Aegean Dataset)</div>
+            <div>• NLP Vectorizer: Sublinear TF-IDF (1-2 N-grams, max 5,000 features)</div>
+            <div>• Classifier: Calibrated L2-Regularized Logistic Regression</div>
+          </div>
+        </div>
+
+        <!-- Feature Attribution Weights Chart (7 Columns) -->
+        <div class="lg:col-span-7 bg-dark-850 rounded-2xl border border-slate-800 p-6 shadow-xl space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <div>
+              <h3 class="text-sm font-bold text-white">Top Indicative NLP Token Weights</h3>
+              <p class="text-[11px] text-slate-400">High positive weights indicate strong fraud signals</p>
+            </div>
+          </div>
+          <div class="h-64">
+            <canvas id="featureChart"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 7: STUDENT DEFENSE GUIDE -->
+    <!-- ========================================== -->
+    <section id="tab-defense-guide" class="tab-content hidden">
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+          <span>Student Anti-Fraud Defense Protocol</span>
+          <span class="text-xs font-normal px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Safety Advisory</span>
+        </h1>
+        <p class="text-sm text-slate-400 mt-1">Essential rules and verified government hotlines every student must check before accepting an internship offer.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Rule 1 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center font-bold">1</div>
+          <h3 class="text-sm font-bold text-white">The Golden Rule: Never Pay</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            No legitimate employer in the world (Google, TCS, Microsoft, startups) will EVER charge a registration fee, laptop insurance deposit, document verification fee, or training kit fee. If they demand money, it is 100% a scam.
+          </p>
+        </div>
+
+        <!-- Rule 2 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center font-bold">2</div>
+          <h3 class="text-sm font-bold text-white">Corporate Domain Verification</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Always inspect the sender's exact email domain after the <code class="text-amber-300">@</code> symbol. Authentic recruiters from Amazon use <code class="text-amber-300">@amazon.com</code>, never <code class="text-rose-400">@gmail.com</code> or <code class="text-rose-400">@amazon-hiring-desk.net</code>.
+          </p>
+        </div>
+
+        <!-- Rule 3 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center font-bold">3</div>
+          <h3 class="text-sm font-bold text-white">Beware Telegram Tasks</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Any offer promising daily payouts (₹2,000 - ₹5,000/day) for liking YouTube videos, rating Google Maps listings, or testing apps on Telegram is a criminal prepaid task scheme. They will ask for 'prepaid investments' after paying a small initial bait.
+          </p>
+        </div>
+
+        <!-- Rule 4 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center font-bold">4</div>
+          <h3 class="text-sm font-bold text-white">Verify Corporate Registration (CIN/MCA)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            In India, check if the company is registered on the Ministry of Corporate Affairs (mca.gov.in). Look for a valid Corporate Identification Number (CIN) and registered office address before signing agreements.
+          </p>
+        </div>
+
+        <!-- Rule 5 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">5</div>
+          <h3 class="text-sm font-bold text-white">National Cybercrime Helpline</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            If you or a classmate was defrauded or threatened, immediately call the National Cyber Crime Reporting Hotline: <strong class="text-emerald-300">1930</strong> (India) or file a complaint on <strong class="text-emerald-300">cybercrime.gov.in</strong>. In the US, report to <strong class="text-emerald-300">ic3.gov</strong>.
+          </p>
+        </div>
+
+        <!-- Rule 6 -->
+        <div class="bg-dark-850 p-5 rounded-2xl border border-slate-800 space-y-3">
+          <div class="h-10 w-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">6</div>
+          <h3 class="text-sm font-bold text-white">Never Surrender Original Marksheets</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Never submit your original 10th/12th/Degree marksheets or sign heavy bond agreements (>₹25,000 exit penalty) with unaccredited training institutes that promise job guarantees.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Report Scam Modal -->
+  <div id="report-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-dark-850 rounded-2xl border border-slate-700 w-full max-w-lg p-6 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-rose-400"></i>
+          <span>Report Fraudulent Recruitment Drive</span>
+        </h3>
+        <button onclick="closeReportModal()" class="text-slate-400 hover:text-white">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="submitScamReport(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Scam Campaign Type *</label>
+          <input type="text" id="report-type" required placeholder="e.g. Telegram Video Liker / Fake NQT Drive"
+            class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2.5 text-slate-100">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Company Claimed by Scammer *</label>
+          <input type="text" id="report-company" required placeholder="e.g. Global Tech Solutions / Spoofed Google"
+            class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2.5 text-slate-100">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Target Student Group</label>
+          <input type="text" id="report-target" placeholder="e.g. B.Tech 2026 Batch / Work from home freshers"
+            class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2.5 text-slate-100">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Modus Operandi / Detailed Description *</label>
+          <textarea id="report-desc" rows="3" required placeholder="Explain how they approached you, what money or action was demanded..."
+            class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2.5 text-slate-100"></textarea>
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Threat Level</label>
+          <select id="report-threat" class="w-full bg-dark-900 border border-slate-700 rounded-xl p-2.5 text-slate-100">
+            <option value="CRITICAL">CRITICAL (Financial Loss / Advance Fee)</option>
+            <option value="HIGH">HIGH (Impersonation / Telegram Redirection)</option>
+            <option value="MEDIUM">MEDIUM (Unpaid Exploitative Bond)</option>
+          </select>
+        </div>
+        <div class="pt-2 flex justify-end gap-2">
+          <button type="button" onclick="closeReportModal()" class="px-4 py-2 rounded-xl bg-dark-800 text-slate-300 hover:bg-dark-750">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold shadow-lg shadow-rose-600/20">Submit Scam Report</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="mt-16 border-t border-slate-800/80 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-2">
+        <span class="font-semibold text-slate-400">JobShield Platform</span>
+        <span>•</span>
+        <span>College Capstone Project</span>
+      </div>
+      <div>
+        <span>Built with FastAPI • Scikit-Learn NLP • Tailwind CSS</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

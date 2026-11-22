@@ -1,0 +1,93 @@
+========================================================================
+JOBSHIELD TEST CASES & SAMPLES FOR DEMONSTRATION & COLLEGE DEFENSE
+========================================================================
+
+------------------------------------------------------------------------
+SCENARIO 1: TELEGRAM YOUTUBE TASK SCAM (CRITICAL RISK - 95%)
+------------------------------------------------------------------------
+Job Title: Online Part-time Assistant / YouTube Video Reviewer
+Company: Global Media Promotion Ltd
+Stipend: INR 5,000 daily guaranteed
+Recruiter Email: hr.taskdesk@gmail.com
+Listing URL: https://bit.ly/fast-task-join
+Description:
+URGENT HIRING! Work from home part time. Earn INR 2,000 to 5,000 daily by simply watching videos, liking YouTube posts, and rating products on Google. No skills or prior experience needed! Suitable for college students, housewives, and freshers. Immediate joining bonus of INR 500 given upon onboarding. Send message on Telegram @JobManagerHR or WhatsApp +91-9876543210 to start receiving tasks today. Guaranteed daily instant payout to your UPI/Paytm wallet.
+
+Why it is flagged:
+1. Off-Platform Telegram Evasion (@JobManagerHR)
+2. Daily Cash Payout Bait (INR 5,000 daily)
+3. Free Webmail Domain for enterprise hiring (gmail.com)
+4. Obfuscated Link Shortener (bit.ly)
+5. Micro-task video liking scam signature
+
+
+------------------------------------------------------------------------
+SCENARIO 2: LAPTOP SECURITY DEPOSIT / DATA ENTRY (CRITICAL RISK - 92%)
+------------------------------------------------------------------------
+Job Title: Remote Data Entry Typist
+Company: Apex Global Solutions Inc
+Stipend: $45 - $75 per hour ($12,000/month)
+Recruiter Email: recruitment.apex@yahoo.com
+Listing URL: http://apex-jobs-remote.top
+Description:
+Immediate vacancy for Remote Data Entry Typist. Earn $45 to $75 per hour typing simple MS Word documents from home. Flexible hours: work just 1 to 2 hours per day. We provide company laptop and typing material upon receipt of a mandatory refundable security deposit of $150 (INR 2,500) for courier dispatch insurance. The deposit is 100% refundable with your first paycheck. Contact our HR coordinator immediately via Telegram: @ApexRecruitmentBot. Limited seats remaining, apply now!
+
+Why it is flagged:
+1. Advance-Fee Security Deposit Extortion ($150 courier insurance)
+2. Exaggerated entry-level salary ($75/hr for basic data typing)
+3. High-risk TLD (.top)
+4. Off-platform Telegram bot
+
+
+------------------------------------------------------------------------
+SCENARIO 3: GOOGLE CLUSTER IMPERSONATION (CRITICAL RISK - 96%)
+------------------------------------------------------------------------
+Job Title: Google Cloud Support Intern (Direct Selection)
+Company: Google LLC (India Hiring Branch)
+Stipend: INR 12 LPA (Direct Selection)
+Recruiter Email: careers-google-recruitment@gmail.com
+Listing URL: https://forms.gle/xYzFakeGoogleDrive
+Description:
+Congratulations! Your profile has been shortlisted directly for Google Cloud Technical Intern role without any interview! Package: INR 12 Lakhs per annum + free MacBook Pro. To confirm your employment slot and issue the official offer letter, you must pay a one-time onboarding document verification fee of INR 3,999 to our authorized vendor UPI account: hrverification@upi. Offer expires in 2 hours if payment is not confirmed. Contact HR on WhatsApp for payment receipt.
+
+Why it is flagged:
+1. Major Enterprise Impersonation (Google LLC using @gmail.com)
+2. Upfront Verification Fee (INR 3,999 to personal UPI)
+3. Direct Selection without technical assessment
+4. Unofficial Google Forms application link
+5. Extreme urgency manipulation (expires in 2 hours)
+
+
+------------------------------------------------------------------------
+SCENARIO 4: UNPAID BOND & PAY-FOR-TRAINING TRAP (HIGH RISK - 78%)
+------------------------------------------------------------------------
+Job Title: Full Stack Web Development Intern
+Company: TechVanguard Innovations
+Stipend: Unpaid / Mandatory Fee INR 8,500
+Recruiter Email: techvanguard-careers@gmail.com
+Listing URL: http://techvanguard-careers.com
+Description:
+Guaranteed 100% placement internship in Python Full Stack & React. Duration: 6 months. Freshers and pre-final year students eligible. Candidate must purchase the mandatory Industry Compliance Certification Kit worth INR 8,500 before joining date. Company will issue letter of recommendation and experience certificate only after completion of paid training modules. No stipend during first 4 months. Limited slots available, pay registration fee immediately.
+
+Why it is flagged:
+1. Pay-for-Training trap (INR 8,500 kit purchase)
+2. Unpaid labor exploitation (> 3 months without stipend)
+3. Registration fee demand
+
+
+------------------------------------------------------------------------
+SCENARIO 5: LEGITIMATE STRIPE SOFTWARE INTERNSHIP (CLEAN - 4%)
+------------------------------------------------------------------------
+Job Title: Software Engineering Intern - Infrastructure
+Company: Stripe
+Stipend: $50 per hour
+Recruiter Email: talent@stripe.com
+Listing URL: https://stripe.com/jobs/infrastructure-intern
+Description:
+We are looking for passionate Software Engineering Interns to join our Infrastructure and Payments team. You will work closely with senior engineers to design, build, and deploy reliable distributed systems. Responsibilities include writing clean Python/Go/Java code, building RESTful APIs, participating in code reviews, and testing scalable microservices. Qualifications: Currently pursuing a BS/MS in Computer Science or related STEM field. Strong fundamentals in Data Structures, Algorithms, and Object-Oriented Programming. Prior project experience in Git, Docker, and relational databases (PostgreSQL/MySQL) is an advantage. Competitive monthly stipend provided with mentor guidance.
+
+Why it is approved:
+1. Authentic corporate domain (@stripe.com)
+2. Specific engineering requirements (Git, Docker, PostgreSQL, code reviews)
+3. Standard monthly stipend
+4. Zero fee demands or Telegram redirects

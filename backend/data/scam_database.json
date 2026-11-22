@@ -1,0 +1,57 @@
+[
+  {
+    "id": "SCAM-2026-001",
+    "scam_type": "Telegram Video Liking & Task Scam",
+    "company_claimed": "Global Media Review Co",
+    "target_audience": "College Students / Freshers",
+    "modus_operandi": "Recruiters reach out on WhatsApp/SMS claiming candidates can earn ₹2,000 - ₹5,000 daily by liking YouTube videos. After paying small initial rewards (₹150), candidates are added to a Telegram VIP group and lured to deposit ₹5,000 to ₹50,000 in 'prepaid tasks' before the scammers disappear.",
+    "reported_date": "2026-02-14",
+    "red_flags": ["Telegram redirection", "Daily cash promises", "Prepaid crypto/task deposit", "No formal contract"],
+    "threat_level": "CRITICAL",
+    "reports_count": 142
+  },
+  {
+    "id": "SCAM-2026-002",
+    "scam_type": "Fake TCS NQT Drive & Registration Fee",
+    "company_claimed": "Tata Consultancy Services (Spoofed)",
+    "target_audience": "Final Year Engineering Students",
+    "modus_operandi": "Phishing emails sent from 'tcs-campus-hiring@gmail.com' claiming candidates are shortlisted for direct interview without online test. Demands ₹1,999 as 'Mandatory Hall Ticket Processing & Verification Fee' via personal UPI QR code.",
+    "reported_date": "2026-02-18",
+    "red_flags": ["Gmail address for MNC", "Upfront registration fee", "Direct selection without test", "Personal UPI handle"],
+    "threat_level": "CRITICAL",
+    "reports_count": 89
+  },
+  {
+    "id": "SCAM-2026-003",
+    "scam_type": "Remote Data Entry Laptop Insurance Deposit",
+    "company_claimed": "Apex Global Transcription Inc",
+    "target_audience": "Work-From-Home / Part-Time Seekers",
+    "modus_operandi": "Promises $45/hour for typing scanned PDF documents. Before sending the 'company provided laptop', candidates are asked to wire $150 (₹2,500) as courier insurance, with false assurances that it will be refunded with the first paycheck.",
+    "reported_date": "2026-01-29",
+    "red_flags": ["Laptop security deposit", "Exaggerated hourly wage", "No interview required", "Untraceable wire payment"],
+    "threat_level": "CRITICAL",
+    "reports_count": 67
+  },
+  {
+    "id": "SCAM-2026-004",
+    "scam_type": "Counterfeit Cheque Home Office Scam",
+    "company_claimed": "Apex Health Dynamics LLC",
+    "target_audience": "Remote Interns & Admin Assistants",
+    "modus_operandi": "Candidate receives a fake digital check of $3,500. They are instructed to deposit it into their bank account, keep $500, and immediately wire $3,000 via Zelle/CashApp to an 'approved vendor' for office setup. Days later, the check bounces and the student is held liable by the bank.",
+    "reported_date": "2026-02-05",
+    "red_flags": ["Check deposit instruction", "Wire transfer to third party", "Instant hire without interview"],
+    "threat_level": "CRITICAL",
+    "reports_count": 51
+  },
+  {
+    "id": "SCAM-2026-005",
+    "scam_type": "Pay-For-Internship & Certificate Bond Trap",
+    "company_claimed": "TechVanguard Solutions",
+    "target_audience": "Pre-Final Year Students seeking mandatory college internships",
+    "modus_operandi": "Advertises full-stack internship, but informs candidate during onboarding that they must pay ₹8,500 for a 'mandatory industrial compliance kit'. Demands surrender of college marksheets and signs a ₹40,000 penalty bond if the student leaves before 6 months unpaid work.",
+    "reported_date": "2026-02-10",
+    "red_flags": ["Pay for training/internship", "Surrender of original certificates", "Unpaid duration > 3 months", "Heavy exit penalty"],
+    "threat_level": "HIGH",
+    "reports_count": 38
+  }
+]
